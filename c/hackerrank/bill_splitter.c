@@ -15,10 +15,10 @@ void main()
     co=b[k];
     htb=(tb-co)/2;
     if(htb==bch)
-        printf(" bill is splitted into perfect halfs without considering the cancelled one.. ");
+        printf("bill is splitted into perfect halfs without considering the cancelled one.. ");
     else 
     {
         op=bch-htb;
-        printf("difference between bill charged and actual bill : %d",op);  //actual bill= witout adding the cancelled order amount...
+        printf("difference between bill charged and actual bill : %d\n",op);  //actual bill= witout adding the cancelled order amount...
     }
 }
