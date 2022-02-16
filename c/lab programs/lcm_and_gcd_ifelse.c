@@ -15,7 +15,7 @@ void main()
         d=n1;
     }
     rem=n%d;
-    while(rem!=0)\
+    while(rem!=0)
     {
         n=d;
         d=rem;
