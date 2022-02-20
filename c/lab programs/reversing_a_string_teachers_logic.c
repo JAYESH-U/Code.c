@@ -6,10 +6,9 @@ void main()
     int j=0,i=0,c=0;
     printf("enter the string the you want to reverse : ");
     gets(a);
-    while (a[c]!='\0')
+    while (a[j]!='\0')
     {
         j++;
-        c++;
     }
     j=j-1;
     while (i<j)
