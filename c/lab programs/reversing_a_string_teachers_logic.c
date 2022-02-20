@@ -3,10 +3,15 @@
 void main()
 {
     char a[50],temp;
-    int j,i=0;
+    int j=0,i=0,c=0;
     printf("enter the string the you want to reverse : ");
     gets(a);
-    j=strlen(a)-1;
+    while (a[c]!='\0')
+    {
+        j++;
+        c++;
+    }
+    j=j-1;
     while (i<j)
     {
         temp=a[i];
