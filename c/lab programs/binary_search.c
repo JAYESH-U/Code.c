@@ -9,9 +9,8 @@ void main()
         scanf("%d",&a[i]);
     printf("enter the key element to search : ");
     scanf("%d",&k);
-    l=0;
+    l=f=0;
     h=n-1;
-    f=0;
     while(l<=h)
     {
         m=(l+h)/2;
@@ -21,12 +20,10 @@ void main()
             break;
         }
         else
-        {
             if(a[m]>k)
                 h=m-1;
             else
                 l=m+1;
-        }
     }
     if(f==1)
         printf("key word %d is found.",k);
