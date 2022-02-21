@@ -15,7 +15,7 @@ void main()
     while(l<=h)
     {
         m=(l+h)/2;
-        if(a[m]=k)
+        if(a[m]==k)
         {
             f=1;
             break;
