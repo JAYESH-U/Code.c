@@ -31,5 +31,5 @@ void main()
     if(f==1)
         printf("key word %d is found.",k);
     else
-        printf("key word %d is found.",k);
+        printf("key word %d is not found.",k);
 }
