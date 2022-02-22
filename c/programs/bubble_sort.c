@@ -2,9 +2,9 @@
 void main()
 {
     int n, a[20], i, j, temp;
-    printf("Enter n:");
+    printf("Enter number of array elements : ");
     scanf("%d", &n);
-    printf("Enter %d numbers:", n);
+    printf("Enter %d numbers :", n);
     for(i=0; i<n; i++)
         scanf("%d", &a[i]);
     for(i=0; i<n-1; i++)
