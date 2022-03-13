@@ -2,7 +2,7 @@
 void main()
 {
     int i, j, n=0;
-    char s[100], ch, temp;
+    char s[100], ch;
     printf("enter the string : ");
     scanf("%s",&s);
     printf("enter the charecter : ");
