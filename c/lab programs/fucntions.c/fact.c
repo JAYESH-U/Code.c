@@ -3,11 +3,11 @@ float fact(int);
 void main()
 {
     int n,r;
-    float ncr;
+    float f;
     printf("enter the values of n : ");
     scanf("%d",&n);
-    ncr=fact(n);
-    printf("n=%d, r=%d ,nCr=%.1f",n,r,ncr);
+    f=fact(n);
+    printf("fact=%.1f",f);
 }
 float fact(int n)
 {
