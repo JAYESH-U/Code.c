@@ -16,9 +16,7 @@ void main()
         }
         p++;
         if(s>10)
-        {
             n=s; 
-        }
     }
     printf("additive persistance is : %d",p);
 }
