@@ -16,3 +16,7 @@ float fact(int n)
     else
         return (n*fact(n-1));
 }
+//fact(5)
+//fact(5) * fact (4)
+//fact(5) * fact (4) * fact (3)
+//so on..........
