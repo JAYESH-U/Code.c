@@ -1,91 +1,107 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-// Queue implementation in C
-
-#include <stdio.h>
-#define SIZE 5
-
-void enQueue(int);
-void deQueue();
-void display();
-
-int items[SIZE], front = -1, rear = -1;
-
-int main()
+struct queue
 {
-    int i, n, ele;
-    printf("Enter 5 elements in one line : ");
-    for (i = 0; i < SIZE; i++)
-    {
-        scanf("%d", &ele);
-        enQueue(ele);
-    }
-    
-    // Now we have just 4 elements
-    display();
+    int size, front, rear;
+    int *elements;
+};
 
-    // deQueue is not possible on empty queue
-    deQueue();
+void initialize(struct queue *qp, int s)
+{
+    qp->front = qp->rear = -1;
+    qp->size = s;
+    qp->elements = calloc(s, sizeof(int));
+}
 
-    // // enQueue 5 elements
-    // enQueue(1);
-    // enQueue(2);
-    // enQueue(3);
-    // enQueue(4);
-    // enQueue(5);
-
-    // // 6th element can't be added to because the queue is full
-    // enQueue(6);
-
-    // display();
-
-    // // deQueue removes element entered first i.e. 1
-    // deQueue();
-
-    // Now we have just 4 elements
-    display();
-
+int queue_empty(struct queue *qp)
+{
+    if (qp->front == qp->rear)
+        return 1;
     return 0;
 }
 
-void enQueue(int value)
+int queue_full(struct queue *qp)
 {
-    if (rear == SIZE - 1)
-        printf("\nQueue is Full!!");
-    else
+    if (qp->rear == (qp->size - 1))
+        return 1;
+    return 0;
+}
+
+int insert(struct queue *qp, int ele)
+{
+    if (queue_full(qp) != 1)
     {
-        if (front == -1)
-            front = 0;
-        rear++;
-        items[rear] = value;
-        printf("\nInserted -> %d", value);
+        qp->elements[++qp->rear] = ele;
+        printf("%d has been enqueued.\n", ele);
+        return 1;
+    }
+    return 0;
+}
+
+int delete(struct queue *qp, int ne)
+{
+    int ele, i;
+    for (i = 0; i < ne; i++)
+    {
+        if (!queue_empty(qp))
+        {
+            ele = qp->elements[++qp->front];
+            printf("%d has been dequeued...\n", ele);
+        }
+        else
+            return 0;
     }
 }
 
-void deQueue()
+void display(struct queue *qp)
 {
-    if (front == -1)
-        printf("\nQueue is Empty!!");
-    else
+    int i = qp->front + 1;
+    while (i != qp->size)
     {
-        printf("\nDeleted : %d", items[front]);
-        front++;
-        if (front > rear)
-            front = rear = -1;
-    }
-}
-
-// Function to print the queue
-void display()
-{
-    if (rear == -1)
-        printf("\nQueue is Empty!!!");
-    else
-    {
-        int i;
-        printf("\nQueue elements are:\n");
-        for (i = front; i <= rear; i++)
-            printf("%d  ", items[i]);
+        printf("%d ", qp->elements[i++]);
     }
     printf("\n");
+}
+
+int main()
+{
+    struct queue q;
+    int n, e, i, ch, ne;
+    printf("Enter the total size of the queue : ");
+    scanf("%d", &n);
+    initialize(&q, n);
+    // printf("size %d",q.size);
+    while (1)
+    {
+        printf("Enter your choice :\n1.Enqueue.\n2.Dequeue.\n3.Display.\n4.Exit.\n:");
+        scanf("%d", &ch);
+        switch (ch)
+        {
+        case 1:
+            printf("Enter the number of elements to be enqueued : ");
+            scanf("%d", &ne);
+            printf("Enter %d elements : ", ne);
+            for (i = 0; i < ne; i++)
+            {
+                scanf("%d", &e);
+                if (insert(&q, e) == 0)
+                    printf("Queue overflow.\n");
+            }
+            break;
+        case 2:
+            printf("Enter the number of elements to be dequeued : ");
+            scanf("%d", &ne);
+            if (!delete (&q, ne))
+                printf("Queue is empty..\n");
+            break;
+        case 3:
+            display(&q);
+            break;
+        case 4:
+            return 0;
+        default:
+            printf("Invalid choice...!!!\n");
+        }
+    }
 }
