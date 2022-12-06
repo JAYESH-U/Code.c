@@ -1,41 +1,105 @@
-// incomplete
-#include<stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
-struct stack{
 
-    int size;
-    int top;
-    int *arr;
-
+struct stack
+{
+    int size, top, *s;
 };
 
-int isEmpty(struct stack *ptr)
+void create(struct stack *st)
 {
-    if(ptr->top==-1)
-        return 1;
-    else
-        return 0;
+    printf("Enter size : ");
+    scanf("%d", &st->size);
+    st->top = -1;
+    st->s = (int *)malloc(st->size * sizeof(int));
 }
 
-int isFull(struct stack * ptr)
+void display(struct stack st)
 {
-    if(ptr->top== ptr->size-1)
-        return 1;
-    else
-        return 0;
+    int i;
+    for (i = st.top; i >= 0; i--)
+        printf("%d ", st.s[i]);
+    printf("\n");
 }
 
-int main (){
-    struct stack *s;
-    s->size = 80;
-    s->top=-1;
-    s->arr = (int*) malloc(s->size * sizeof(int));
+void push(struct stack *st, int x)
+{
+    if (st->top == st->size - 1)
+        printf("Stack overflow..\n");
+    else
+    {
+        st->s[++st->top] = x;
+    }
+}
 
-    if(isEmpty(s)){
-        printf("The Stack is Empty\n");
+int pop(struct stack *st)
+{
+    if(st->top==-1)
+    {
+        printf("Stack underflow..\n");
+        return -1;
     }
-    else{
-        printf("The Not Stack is Empty\n");
+    else
+        return st->s[st->top--];
+}
+
+int peek(struct stack st, int index)
+{
+    if(st.top-index+1<0){
+        printf("Invalid index..\n");
+        return -1;
     }
+    return st.s[st.top-index+1];
+}
+
+int isEmpty(struct stack st)
+{
+    if(st.top==-1)
+        return 1;
+    return 0;
+}
+
+int isFull(struct stack st)
+{
+    if(st.top==st.size-1)
+        return 1;
+    return -1;
+}
+
+int stackTop(struct stack st)
+{
+    if(!isEmpty(st))
+        return st.s[st.top];
+    return 0;
+}
+
+int main()
+{
+    struct stack st;
+    create(&st);
+
+    push(&st,10);
+    push(&st,20);
+    push(&st,30);
+    push(&st,40);
+    // push(&st,50);
+
+    display(st);
+    
+    printf("stack peek : %d\n",peek(st,1));
+
+    // pop(&st);
+    // display(st);
+
+    // printf("%d \n",pop(&st));
+    // printf("%d \n",pop(&st));
+    // printf("%d \n",pop(&st));
+    // printf("%d \n",pop(&st));
+    // printf("%d \n",pop(&st));
+    // printf("%d \n",pop(&st));
+
+    // push(&st,60);
+    // display(st);
+
     return 0;
 }
