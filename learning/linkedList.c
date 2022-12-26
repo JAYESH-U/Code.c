@@ -170,6 +170,25 @@ struct node* searchMoveFront(struct node *p, int k)
     }
 }
 
+//inserting new element.
+void insert(struct node*p,int index,int ele){
+    if(index<0 || index>count(p))
+        return;
+    struct node *t=(struct node *)malloc(sizeof(struct node));
+    t->data = ele;
+    
+    if(index == 0){
+        t->next = first;
+        first = t;
+    }
+    else{
+        for(int i=0;i<index-1;i++)
+            p = p->next;
+        t->next = p->next;
+        p->next = t;
+    }
+}
+
 int main()
 {
     int a[] = {1, 2, 3, 4, 5};
@@ -198,6 +217,10 @@ int main()
         printf("\nKey element %d is found.", key->data);
     else
         printf("\nKey 6 not found.");
+
+    insert(first,0,10); //we can use insert function to create(initialize) a linked list.
+    insert(first,4,20);
+    insert(first,10,20);    //invalid index(will not be inserted.)
 
     display(first);
     return 0;
