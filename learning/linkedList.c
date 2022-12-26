@@ -135,7 +135,7 @@ int maxRecTernary(struct node *p)
 }
 
 // search node
-struct node* search(struct node *p, int k)
+struct node *search(struct node *p, int k)
 {
     while (p != NULL)
     {
@@ -153,7 +153,7 @@ struct node *searchRec(struct node *p, int k)
     return searchRec(p->next, k);
 }
 
-struct node* searchMoveFront(struct node *p, int k)
+struct node *searchMoveFront(struct node *p, int k)
 {
     struct node *q;
     while (p != NULL)
@@ -170,19 +170,22 @@ struct node* searchMoveFront(struct node *p, int k)
     }
 }
 
-//inserting new element.
-void insert(struct node*p,int index,int ele){
-    if(index<0 || index>count(p))
+// inserting new element.
+void insert(struct node *p, int index, int ele)
+{
+    if (index < 0 || index > count(p))
         return;
-    struct node *t=(struct node *)malloc(sizeof(struct node));
+    struct node *t = (struct node *)malloc(sizeof(struct node));
     t->data = ele;
-    
-    if(index == 0){
+
+    if (index == 0)
+    {
         t->next = first;
         first = t;
     }
-    else{
-        for(int i=0;i<index-1;i++)
+    else
+    {
+        for (int i = 0; i < index - 1; i++)
             p = p->next;
         t->next = p->next;
         p->next = t;
@@ -208,19 +211,19 @@ int main()
     // printf("\nMax value in the List : %d", maxRec(first));
     printf("\nMax value in the List : %d", maxRecTernary(first));
 
-    struct node *key ;
+    struct node *key;
     // key = search(first, 4);
     // key = searchRec(first, 6);
-    key = searchMoveFront(first, 4);    //move the key element to front(first).
-    key = searchMoveFront(first, 3);    //move the key element to front(first).
+    key = searchMoveFront(first, 4); // move the key element to front(first).
+    key = searchMoveFront(first, 3); // move the key element to front(first).
     if (key)
         printf("\nKey element %d is found.", key->data);
     else
         printf("\nKey 6 not found.");
 
-    insert(first,0,10); //we can use insert function to create(initialize) a linked list.
-    insert(first,4,20);
-    insert(first,10,20);    //invalid index(will not be inserted.)
+    insert(first, 0, 10); // we can use insert function to create(initialize) a linked list.
+    insert(first, 4, 20);
+    insert(first, 10, 20); // invalid index(will not be inserted.)
 
     display(first);
     return 0;
