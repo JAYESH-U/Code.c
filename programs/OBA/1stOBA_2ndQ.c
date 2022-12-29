@@ -34,17 +34,22 @@ void main()
     printf("K : ");
     scanf("%d", &k);
 
-    // sorting the array in ascending order.
-    for (i = 0; i < n; i++)
-        for (j = 0; j < n - i - 1; j++)
-            if (a[j] > a[j + 1])
-            {
-                int temp = a[j];
-                a[j] = a[j + 1];
-                a[j + 1] = temp;
-            }
-
-    // printing the kth smallest element in the array.
-    // as Array starts from index 0, we print k-1 th element.
-    printf("Output : %d", a[k - 1]);
+    //check whether k is smaller then size of array.
+    if(k<n)
+    {
+        // sorting the array in ascending order.
+        for (i = 0; i < n; i++)
+            for (j = 0; j < n - i - 1; j++)
+                if (a[j] > a[j + 1])
+                {
+                    int temp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = temp;
+                }
+        // printing the kth smallest element in the array.
+        // as Array starts from index 0, we print k-1 th element.
+        printf("Output : %d", a[k - 1]);
+    }
+    else
+        printf("K must be smaller then size of array.!!");
 }
