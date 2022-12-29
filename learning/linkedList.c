@@ -1,16 +1,17 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <malloc.h>
 
 struct node
 {
     int data;
     struct node *next;
-} *first = NULL;
+} *first = NULL, *last = NULL;
 
 void create(int a[], int n)
 {
     int i;
-    struct node *t, *last;
+    // struct node *t, *last;
+    struct node *t;
     first = (struct node *)malloc(sizeof(struct node));
     first->data = a[0];
     first->next = NULL;
@@ -192,9 +193,115 @@ void insert(struct node *p, int index, int ele)
     }
 }
 
+// //insert last
+// void insertLast(int x)
+// {
+//     struct node *t = (struct node*)malloc(sizeof(struct node));
+//     t->data = x;
+//     t->next = NULL;
+//     if(first == NULL)
+//         first = last = t;
+//     else
+//     {
+//         last->next = t;
+//         last = t;
+//     }
+// }
+
+void insertSortedList(struct node *p, int x)
+{
+    struct node *q=NULL;
+    struct node *t = (struct node *)malloc(sizeof(struct node));
+    t->data = x;
+    t->next = NULL;
+    if(first == NULL)
+        first = last = t ;
+    else
+    {
+        while (p && p->data < x)
+        {
+            q = p;
+            p = p->next;
+        }
+        if(p == first)
+        {
+            t->next = first;
+            first = t;
+        }
+        else
+        {
+            t->next = q->next;
+            q->next = t;
+        }
+    }
+}
+
+//delete an element
+int delete(struct node *p,int index)
+{
+    struct node*q=NULL;
+    int x = -1,i;
+    if(index <1 || index > count(p))
+        return -1;
+    if(index == 1)
+    {
+        q = first;
+        x = first->data;
+        first = first->next;
+        free(q);
+        return x;
+    }
+    else
+    {
+        for(i=0;i<index-1;i++)
+        {
+            q = p;
+            p=p->next;
+        }
+        q->next = p->next;
+        x = p->data;
+        free(p);
+        return x;
+    }
+}
+
+//check sort
+int checkSort(struct node *p)
+{
+    int x = -32768;
+    while(p)
+    {
+        if(p->data < x)
+            return 0;
+        x = p->data;
+        p= p->next;
+    }
+    return 1;
+}
+
+//delete duplicates
+void deleteDuplicate(struct node *p)
+{
+    struct node*q = p->next;
+    while(q!=NULL)
+    {
+        if(p->data != q->data)
+        {
+            p=q;
+            q=q->next;
+        }
+        else
+        {
+            p->next=q->next;
+            free(q);
+            q= p->next;
+        }
+    }
+}
+
 int main()
 {
-    int a[] = {1, 2, 3, 4, 5};
+    int a[] = {1, 2, 3, 4, 5};  //sorted elements
     create(a, 5);
 
     // display(first);
@@ -214,16 +321,36 @@ int main()
     struct node *key;
     // key = search(first, 4);
     // key = searchRec(first, 6);
-    key = searchMoveFront(first, 4); // move the key element to front(first).
-    key = searchMoveFront(first, 3); // move the key element to front(first).
-    if (key)
-        printf("\nKey element %d is found.", key->data);
-    else
-        printf("\nKey 6 not found.");
-
-    insert(first, 0, 10); // we can use insert function to create(initialize) a linked list.
-    insert(first, 4, 20);
+    // key = searchMoveFront(first, 4); // move the key element to front(first).
+    // key = searchMoveFront(first, 3); // move the key element to front(first).
+    // if (key)
+        // printf("\nKey element %d is found.", key->data);
+    // else
+        // printf("\nKey 6 not found.");
+        
+    // insert(first, 0, 10); // we can use insert function to create(initialize) a linked list.
+    insert(first, 5, 20);
     insert(first, 10, 20); // invalid index(will not be inserted.)
+
+    insertSortedList(first,10); //comment insert call, search move front, then execute.
+    insertSortedList(first,30);
+    insertSortedList(first,15);
+
+    // delete(first,4);
+    printf("\nDeleted element : %d",delete(first,4));
+
+    if(checkSort(first))
+        printf("\nList is sorted.");
+    else
+        printf("\nList is not sorted.");
+
+    insertSortedList(first,10); //comment insert call, search move front, then execute.
+    insertSortedList(first,30);
+    insertSortedList(first,15);
+    
+    display(first);
+    
+    deleteDuplicate(first);
 
     display(first);
     return 0;
