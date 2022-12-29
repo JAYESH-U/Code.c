@@ -23,18 +23,18 @@ void main()
     printf("N : ");
     scanf("%d", &n);
 
-    //dynamic memory allocation for array.
-    a = (int *)malloc(n * sizeof(int)); 
+    // dynamic memory allocation for array.
+    a = (int *)malloc(n * sizeof(int));
 
-    //array input
+    // array input
     printf("arr[] : ");
     for (i = 0; i < n; i++)
         scanf("%d", &a[i]);
-    
+
     printf("K : ");
     scanf("%d", &k);
 
-    //sorting the array in ascending order.
+    // sorting the array in ascending order.
     for (i = 0; i < n; i++)
         for (j = 0; j < n - i - 1; j++)
             if (a[j] > a[j + 1])
@@ -43,8 +43,8 @@ void main()
                 a[j] = a[j + 1];
                 a[j + 1] = temp;
             }
-    
-    //printing the kth smallest element in the array.
-    //as Array starts from index 0, we print k-1 th element.
+
+    // printing the kth smallest element in the array.
+    // as Array starts from index 0, we print k-1 th element.
     printf("Output : %d", a[k - 1]);
 }

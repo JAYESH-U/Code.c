@@ -23,7 +23,7 @@ void main()
     printf("N : ");
     scanf("%d", &n);
 
-    //dynamic memory allocation.
+    // dynamic memory allocation.
     a = (int *)malloc(n * sizeof(int));
 
     printf("S : ");
@@ -33,21 +33,21 @@ void main()
     for (i = 0; i < n; i++)
         scanf("%d", &a[i]);
 
-    //searching for substring
+    // searching for substring
     for (i = 0; i < n; i++)
     {
-        fi = i + 1; //first index initialization.
+        fi = i + 1; // first index initialization.
         int sum = 0;
         for (j = i; j < n; j++)
         {
-            sum += a[j];    //addition of elemets of substring
+            sum += a[j]; // addition of elemets of substring
             if (sum == s)
             {
-                li = j + 1; //last index initialization.
-                i = n;  //terminate first for loop.
+                li = j + 1; // last index initialization.
+                i = n;      // terminate first for loop.
             }
             else if (sum > s)
-                break;  //break loop.
+                break; // break loop.
         }
     }
     printf("Output : %d %d", fi, li);

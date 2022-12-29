@@ -30,12 +30,12 @@ void main()
     scanf("%s", s);
 
     for (i = 0; s[i] != '\0'; i++)
-        if (s[i] >= 'a' && s[i] <= 'z') //checking wheather the charecter falls between 'a' to 'z'
-            val[s[i] - 'a']++;          //incrementing the occourance value of i-th alphabet
-        else if (s[i] >= 'A' && s[i] <= 'Z')    //checking wheather the charecter falls between 'A' to 'Z'
-            val[s[i] - 'A']++;          //incrementing the occourance value of i-th alphabet
+        if (s[i] >= 'a' && s[i] <= 'z')      // checking wheather the charecter falls between 'a' to 'z'
+            val[s[i] - 'a']++;               // incrementing the occourance value of i-th alphabet
+        else if (s[i] >= 'A' && s[i] <= 'Z') // checking wheather the charecter falls between 'A' to 'Z'
+            val[s[i] - 'A']++;               // incrementing the occourance value of i-th alphabet
     for (i = 0; i < 26; i++)
-        if(val[i])          //check if occourance value is not 0
+        if (val[i]) // check if occourance value is not 0
             printf("%c : %d\n", i + 'a', val[i]);
 }
 

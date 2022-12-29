@@ -25,44 +25,44 @@ in the given array.
 
 void main()
 {
-    int n,*a,i,j,c=0;
+    int n, *a, i, j, c = 0;
     printf("N = ");
-    scanf("%d",&n);
+    scanf("%d", &n);
 
-    //Dynamic memory allocation for array   
-    a = (int*)malloc(n*sizeof(int));
+    // Dynamic memory allocation for array
+    a = (int *)malloc(n * sizeof(int));
 
     printf("a[] = ");
-    for(i=0;i<n;i++)
-        scanf("%d",&a[i]);
+    for (i = 0; i < n; i++)
+        scanf("%d", &a[i]);
 
-    //sorting of array by bubble sort.
-    for(i=0;i<n;i++)
-        for(j=0;j<n-i-1;j++)
-            if(a[j]>a[j+1])
+    // sorting of array by bubble sort.
+    for (i = 0; i < n; i++)
+        for (j = 0; j < n - i - 1; j++)
+            if (a[j] > a[j + 1])
             {
                 int temp = a[j];
-                a[j] = a[j+1];
-                a[j+1] = temp;
+                a[j] = a[j + 1];
+                a[j + 1] = temp;
             }
 
     printf("Output : ");
-    for(i=0;i<n;i++)
+    for (i = 0; i < n; i++)
     {
-        int f =0;
-        //incrementing the index if element is same.
-        while(i<n-1 && a[i]==a[i+1])    
+        int f = 0;
+        // incrementing the index if element is same.
+        while (i < n - 1 && a[i] == a[i + 1])
         {
-            f=1;
-            c++;    //incrementing count if repeating elements encountered.
+            f = 1;
+            c++; // incrementing count if repeating elements encountered.
             i++;
         }
-        //print the element if flag is not zero.
-        if(f)
-            printf("%d ",a[i-1]);
+        // print the element if flag is not zero.
+        if (f)
+            printf("%d ", a[i - 1]);
     }
 
-    //if c is zero then print -1.
-    if(!c)
+    // if c is zero then print -1.
+    if (!c)
         printf("-1");
 }
