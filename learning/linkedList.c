@@ -210,12 +210,12 @@ void insert(struct node *p, int index, int ele)
 
 void insertSortedList(struct node *p, int x)
 {
-    struct node *q=NULL;
+    struct node *q = NULL;
     struct node *t = (struct node *)malloc(sizeof(struct node));
     t->data = x;
     t->next = NULL;
-    if(first == NULL)
-        first = last = t ;
+    if (first == NULL)
+        first = last = t;
     else
     {
         while (p && p->data < x)
@@ -223,7 +223,7 @@ void insertSortedList(struct node *p, int x)
             q = p;
             p = p->next;
         }
-        if(p == first)
+        if (p == first)
         {
             t->next = first;
             first = t;
@@ -236,14 +236,14 @@ void insertSortedList(struct node *p, int x)
     }
 }
 
-//delete an element
-int delete(struct node *p,int index)
+// delete an element
+int delete(struct node *p, int index)
 {
-    struct node*q=NULL;
-    int x = -1,i;
-    if(index <1 || index > count(p))
+    struct node *q = NULL;
+    int x = -1, i;
+    if (index < 1 || index > count(p))
         return -1;
-    if(index == 1)
+    if (index == 1)
     {
         q = first;
         x = first->data;
@@ -253,10 +253,10 @@ int delete(struct node *p,int index)
     }
     else
     {
-        for(i=0;i<index-1;i++)
+        for (i = 0; i < index - 1; i++)
         {
             q = p;
-            p=p->next;
+            p = p->next;
         }
         q->next = p->next;
         x = p->data;
@@ -265,43 +265,94 @@ int delete(struct node *p,int index)
     }
 }
 
-//check sort
+// check sort
 int checkSort(struct node *p)
 {
     int x = -32768;
-    while(p)
+    while (p)
     {
-        if(p->data < x)
+        if (p->data < x)
             return 0;
         x = p->data;
-        p= p->next;
+        p = p->next;
     }
     return 1;
 }
 
-//delete duplicates
+// delete duplicates
 void deleteDuplicate(struct node *p)
 {
-    struct node*q = p->next;
-    while(q!=NULL)
+    struct node *q = p->next;
+    while (q != NULL)
     {
-        if(p->data != q->data)
+        if (p->data != q->data)
         {
-            p=q;
-            q=q->next;
+            p = q;
+            q = q->next;
         }
         else
         {
-            p->next=q->next;
+            p->next = q->next;
             free(q);
-            q= p->next;
+            q = p->next;
         }
     }
 }
 
+// reverse list.
+void reverseArr(struct node *p)
+{
+    int *a, i = 0;
+    struct node *q = p;
+
+    a = (int *)malloc(sizeof(int) * count(p));
+
+    while (q)
+    {
+        a[i] = q->data;
+        q = q->next;
+        i++;
+    }
+
+    q = p; // assign again.
+    i--;
+
+    while (q)
+    {
+        q->data = a[i];
+        q = q->next;
+        i--;
+    }
+}
+
+void reversePoint(struct node *p)
+{
+    struct node *q = NULL, *r = NULL;
+
+    while (p)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    first = q;
+}
+
+void reverseRec(struct node *q, struct node *p)
+{
+    if (p)
+    {
+        reverseRec(p, p->next);
+        p->next = q;
+    }
+    else
+        first = q;
+}
+
 int main()
 {
-    int a[] = {1, 2, 3, 4, 5};  //sorted elements
+    int a[] = {1, 2, 3, 4, 5}; // sorted elements
     create(a, 5);
 
     // display(first);
@@ -324,33 +375,42 @@ int main()
     // key = searchMoveFront(first, 4); // move the key element to front(first).
     // key = searchMoveFront(first, 3); // move the key element to front(first).
     // if (key)
-        // printf("\nKey element %d is found.", key->data);
+    // printf("\nKey element %d is found.", key->data);
     // else
-        // printf("\nKey 6 not found.");
-        
+    // printf("\nKey 6 not found.");
+
     // insert(first, 0, 10); // we can use insert function to create(initialize) a linked list.
     insert(first, 5, 20);
     insert(first, 10, 20); // invalid index(will not be inserted.)
 
-    insertSortedList(first,10); //comment insert call, search move front, then execute.
-    insertSortedList(first,30);
-    insertSortedList(first,15);
+    insertSortedList(first, 10); // comment insert call, search move front, then execute.
+    insertSortedList(first, 30);
+    insertSortedList(first, 15);
 
     // delete(first,4);
-    printf("\nDeleted element : %d",delete(first,4));
+    printf("\nDeleted element : %d", delete (first, 4));
 
-    if(checkSort(first))
+    if (checkSort(first))
         printf("\nList is sorted.");
     else
         printf("\nList is not sorted.");
 
-    insertSortedList(first,10); //comment insert call, search move front, then execute.
-    insertSortedList(first,30);
-    insertSortedList(first,15);
-    
+    insertSortedList(first, 10); // comment insert call, search move front, then execute.
+    insertSortedList(first, 30);
+    insertSortedList(first, 15);
+
     display(first);
-    
+
     deleteDuplicate(first);
+
+    printf("\nreverse list :");
+    reverseArr(first);
+
+    printf("\nreverse list :");
+    reversePoint(first);
+
+    printf("\nreverse list :");
+    reverseRec(NULL, first);
 
     display(first);
     return 0;
