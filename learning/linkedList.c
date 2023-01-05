@@ -212,21 +212,6 @@ void insert(struct node *p, int index, int ele)
     }
 }
 
-// //insert last
-// void insertLast(int x)
-// {
-//     struct node *t = (struct node*)malloc(sizeof(struct node));
-//     t->data = x;
-//     t->next = NULL;
-//     if(first == NULL)
-//         first = last = t;
-//     else
-//     {
-//         last->next = t;
-//         last = t;
-//     }
-// }
-
 void insertSortedList(struct node *p, int x)
 {
     struct node *q = NULL;
@@ -416,19 +401,49 @@ void merge(struct node *p, struct node *q)
         last->next = q;
 }
 
+// check if link has loop
+int loop(struct node *f)
+{
+    struct node *q, *p;
+    p = q = f;
+
+    do
+    {
+        p = p->next;
+        q = q->next;
+        q = q ? q->next : q;
+    } while (p && q && p != q);
+
+    if (p == q)
+        return 1;
+    else
+        return 0;
+}
+
 int main()
 {
     int a[] = {10, 20, 30, 40, 50}; // sorted elements
-    int b[] = {5, 15, 25, 35, 45};  // sorted elements
     create(a, 5);
-    create2(b, 5);
+
+    // int b[] = {5, 15, 25, 35, 45};  // sorted elements
+    // create2(b, 5);
 
     printf("\nFirst: ");
     display(first);
     // displayRec(first);
 
-    printf("\nSecond: ");
-    display(second);
+    // printf("\nSecond: ");
+    // display(second);
+
+    /*
+        struct node *t1,*t2;
+        t1 = first->next->next;
+        t2 = first->next->next->next->next;
+        t2->next=t1;
+
+        printf("\nIs loop : %d",loop(first));
+    */
+
     /*
         //comment these before merging..
         concat(first, second);
@@ -445,7 +460,8 @@ int main()
         display(third);
         // display(first); //wont consider first element..
     */
-    /**/
+
+    /*
         // printf("\nNumber of nodes : %d",count(first));
         printf("\nNumber of nodes : %d", countRec(first));
 
@@ -501,6 +517,6 @@ int main()
         reverseRec(NULL, first);
 
         display(first);
-    
+    */
     return 0;
 }
