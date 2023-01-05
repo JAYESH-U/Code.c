@@ -5,7 +5,7 @@ struct node
 {
     int data;
     struct node *next;
-} *first = NULL, *last = NULL;
+} *first = NULL, *last = NULL, *second = NULL, *third = NULL;
 
 void create(int a[], int n)
 {
@@ -16,6 +16,25 @@ void create(int a[], int n)
     first->data = a[0];
     first->next = NULL;
     last = first; // in for loop last->next = t;
+    for (i = 1; i < n; i++)
+    {
+        t = (struct node *)malloc(sizeof(struct node));
+        t->data = a[i];
+        t->next = NULL;
+        last->next = t; // here.
+        last = t;
+    }
+}
+
+void create2(int a[], int n)
+{
+    int i;
+    // struct node *t, *last;
+    struct node *t;
+    second = (struct node *)malloc(sizeof(struct node));
+    second->data = a[0];
+    second->next = NULL;
+    last = second; // in for loop last->next = t;
     for (i = 1; i < n; i++)
     {
         t = (struct node *)malloc(sizeof(struct node));
@@ -350,68 +369,138 @@ void reverseRec(struct node *q, struct node *p)
         first = q;
 }
 
+// concatination
+void concat(struct node *p, struct node *q)
+{
+    third = p;
+    while (p->next)
+        p = p->next;
+    p->next = q;
+}
+
+// merging
+void merge(struct node *p, struct node *q)
+{
+    if (p->data < q->data)
+    {
+        third = last = p;
+        p = p->next;
+        third->next = NULL;
+    }
+    else
+    {
+        third = last = q;
+        q = q->next;
+        third->next = NULL;
+    }
+    while (p && q)
+    {
+        if (p->data < q->data)
+        {
+            last->next = p;
+            last = p;
+            p = p->next;
+            last->next = NULL;
+        }
+        else
+        {
+            last->next = q;
+            last = q;
+            q = q->next;
+            last->next = NULL;
+        }
+    }
+    if (p)
+        last->next = p;
+    if (q)
+        last->next = q;
+}
+
 int main()
 {
-    int a[] = {1, 2, 3, 4, 5}; // sorted elements
+    int a[] = {10, 20, 30, 40, 50}; // sorted elements
+    int b[] = {5, 15, 25, 35, 45};  // sorted elements
     create(a, 5);
+    create2(b, 5);
 
-    // display(first);
-    displayRec(first);
-
-    // printf("\nNumber of nodes : %d",count(first));
-    printf("\nNumber of nodes : %d", countRec(first));
-
-    // printf("\nSum of data : %d", add(first));
-    printf("\nSum of data : %d", addRec(first));
-    printf("\nSum of data : %d", addRec(first));
-
-    // printf("\nMax value in the List : %d", max(first));
-    // printf("\nMax value in the List : %d", maxRec(first));
-    printf("\nMax value in the List : %d", maxRecTernary(first));
-
-    struct node *key;
-    // key = search(first, 4);
-    // key = searchRec(first, 6);
-    // key = searchMoveFront(first, 4); // move the key element to front(first).
-    // key = searchMoveFront(first, 3); // move the key element to front(first).
-    // if (key)
-    // printf("\nKey element %d is found.", key->data);
-    // else
-    // printf("\nKey 6 not found.");
-
-    // insert(first, 0, 10); // we can use insert function to create(initialize) a linked list.
-    insert(first, 5, 20);
-    insert(first, 10, 20); // invalid index(will not be inserted.)
-
-    insertSortedList(first, 10); // comment insert call, search move front, then execute.
-    insertSortedList(first, 30);
-    insertSortedList(first, 15);
-
-    // delete(first,4);
-    printf("\nDeleted element : %d", delete (first, 4));
-
-    if (checkSort(first))
-        printf("\nList is sorted.");
-    else
-        printf("\nList is not sorted.");
-
-    insertSortedList(first, 10); // comment insert call, search move front, then execute.
-    insertSortedList(first, 30);
-    insertSortedList(first, 15);
-
+    printf("\nFirst: ");
     display(first);
+    // displayRec(first);
 
-    deleteDuplicate(first);
+    printf("\nSecond: ");
+    display(second);
+    /*
+        //comment these before merging..
+        concat(first, second);
 
-    printf("\nreverse list :");
-    reverseArr(first);
+        printf("\nconcatinated : ");
+        // display(first);
+        display(third);
+    */
 
-    printf("\nreverse list :");
-    reversePoint(first);
+    /*
+        merge(first, second);
 
-    printf("\nreverse list :");
-    reverseRec(NULL, first);
+        printf("\nMerged : ");
+        display(third);
+        // display(first); //wont consider first element..
+    */
+    /**/
+        // printf("\nNumber of nodes : %d",count(first));
+        printf("\nNumber of nodes : %d", countRec(first));
 
-    display(first);
+        // printf("\nSum of data : %d", add(first));
+        printf("\nSum of data : %d", addRec(first));
+        printf("\nSum of data : %d", addRec(first));
+
+        // printf("\nMax value in the List : %d", max(first));
+        // printf("\nMax value in the List : %d", maxRec(first));
+        printf("\nMax value in the List : %d", maxRecTernary(first));
+
+        struct node *key;
+        // key = search(first, 4);
+        // key = searchRec(first, 6);
+        // key = searchMoveFront(first, 4); // move the key element to front(first).
+        // key = searchMoveFront(first, 3); // move the key element to front(first).
+        // if (key)
+        // printf("\nKey element %d is found.", key->data);
+        // else
+        // printf("\nKey 6 not found.");
+
+        insertSortedList(first, 10); // comment insert call, search move front, then execute.
+        insertSortedList(first, 30);
+        insertSortedList(first, 15);
+
+        insert(first, 0, 10); // we can use insert function to create(initialize) a linked list.
+        // insert(first, 5, 20);   //it wint be sorted after this..-->DONT BE SURPRISED.
+        insert(first, 10, 20); // invalid index(will not be inserted.)
+
+        // delete(first,4);
+        printf("\nDeleted element : %d", delete (first, 4));
+
+        if (checkSort(first))
+            printf("\nList is sorted.");
+        else
+            printf("\nList is not sorted.");
+
+        insertSortedList(first, 10); // comment insert call, search move front, then execute.
+        insertSortedList(first, 30);
+        insertSortedList(first, 15);
+
+        display(first);
+
+        deleteDuplicate(first);
+
+        printf("\nreverse list :");
+        reverseArr(first);
+
+        printf("\nreverse list :");
+        reversePoint(first);
+
+        printf("\nreverse list :");
+        reverseRec(NULL, first);
+
+        display(first);
+    
     return 0;
 }
