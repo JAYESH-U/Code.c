@@ -41,14 +41,14 @@ void insertAtRight(struct node *p, int k, int x)
     t->right = q;
     t->left = p;
     p->right = t;
-    if(q)
-         q->left = t;
+    if (q)
+        q->left = t;
 }
 
 void insertAtLeft(struct node *p, int k, int x)
 {
     struct node *t = (struct node *)malloc(sizeof(struct node));
-    struct node *q=NULL;
+    struct node *q = NULL;
     t->data = x;
     while (p->data != k && p)
     {
@@ -58,7 +58,7 @@ void insertAtLeft(struct node *p, int k, int x)
     t->right = p;
     t->left = q;
     p->left = t;
-    if(q)
+    if (q)
         q->right = t;
     first = t;
 }
