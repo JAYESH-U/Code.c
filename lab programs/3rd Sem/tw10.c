@@ -1,7 +1,6 @@
-
 #include <stdio.h>
-#include<stdbool.h>
-#define N 3
+#include <stdbool.h>
+#define N 4
 
 int board[N][N];
 
@@ -53,7 +52,7 @@ bool solveNQueensUtil(int col)
 // Function to solve N-Queens problem
 void solveNQueens()
 {
-    if (solveNQueensUtil(0) == false)
+    if (!solveNQueensUtil(0))
     {
         printf("Solution does not exist");
         return;
@@ -69,7 +68,7 @@ void solveNQueens()
 
 int main()
 {
-    printf("solution for N= %d\n",N);
+    printf("solution for N= %d\n", N);
     solveNQueens();
     return 0;
 }
