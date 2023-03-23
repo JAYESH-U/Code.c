@@ -1,5 +1,5 @@
-
 #include<stdio.h>
+
 void floyd(int a[4][4], int n)
 {
 	for(int k=0;k<n;k++)
@@ -25,6 +25,7 @@ void floyd(int a[4][4], int n)
 	    	printf("\n");
 		}
 }
+
 int main()
 {
     int i,j;
@@ -33,9 +34,13 @@ int main()
 	for(int i=0;i<4;i++)
     {
         for(j=0;j<4;j++){
-            printf("(%d,%d) -> %d\n",i,j,cost[i][j]);
+            //printf("(%d,%d) -> %d\n",i,j,cost[i][j]);
+			if(cost[i][j] == 999)
+				printf("* ");
+			else
+				printf("%d ",cost[i][j]);
         }
-
+		printf("\n");
     }
 	int n = 4;
 
