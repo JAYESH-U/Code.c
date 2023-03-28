@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 
 void quickSort(int arr[], int left, int right)
 {
@@ -35,10 +36,20 @@ int main()
   for (i = 0; i < n; i++)
     printf("%d ", arr[i]);
 
-  quickSort(arr, 0, n - 1);
+  clock_t ts = clock();
+
+  for(int i=0;i<1000;i++)
+    for(int j=0;j<1000;j++)
+      quickSort(arr, 0, n - 1);
 
   printf("\nSorted array: \n");
   for (i = 0; i < n; i++)
     printf("%d ", arr[i]);
+
+  clock_t te = clock();
+
+  double tt = (double)(te-ts)/CLOCKS_PER_SEC;
+
+  printf("\nTime taken : %f seconds",tt);
   return 0;
 }
