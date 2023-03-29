@@ -54,7 +54,7 @@ void primMST(int graph[V][V])
 	{
 		// Pick the minimum key vertex from the set of vertices not yet included in MST
 		int u = minKey(key, mstSet);
-		printf("\nu = %d", u);
+		//printf("\nu = %d", u);
 
 		// Add the picked vertex to the MST Set
 		mstSet[u] = true;
