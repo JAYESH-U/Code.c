@@ -24,6 +24,8 @@ int priority(char x)
         return 1;
     if (x == '*' || x == '/')
         return 2;
+    if (x == '^')
+        return 3;
     return 0;
 }
 
