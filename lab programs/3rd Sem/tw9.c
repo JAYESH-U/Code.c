@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void floyd(int a[4][4], int n)
+void floyd(int a[5][5], int n)
 {
 	for (int k = 0; k < n; k++)
 		for (int i = 0; i < n; i++)
@@ -20,12 +20,13 @@ void floyd(int a[4][4], int n)
 int main()
 {
 	int i, j;
-	int cost[4][4] = {{0, 3, 999, 4},
-					  {8, 0, 2, 999},
-					  {5, 999, 0, 1},
-					  {2, 999, 999, 0}};
+	int cost[5][5] = {{0, 999, 6, 3, 999},
+					  {3, 0, 999, 999, 999},
+					  {999, 999, 0, 2, 999},
+					  {999, 1, 1, 0, 999},
+					  {999, 4, 999, 2, 0}};
 
-	int n = 4;
+	int n = 5;
 
 	printf("path between each pair:\n");
 	for (int i = 0; i < n; i++)
