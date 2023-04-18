@@ -49,9 +49,9 @@ void insert(struct node *p, int x)
 void display(struct node *p)
 {
     printf("\nList : ");
-    while(p)
+    while (p)
     {
-        printf("%d ",p->data);
+        printf("%d ", p->data);
         p = p->next;
     }
 }
